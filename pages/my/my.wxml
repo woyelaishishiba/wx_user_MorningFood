@@ -1,0 +1,19 @@
+<!--pages/my/my.wxml-->
+<view class="page__bd page__bd_spacing">
+  <view class="userButton">
+    <button class="weui-btn" type="primary" data-total="{{total_fee}}" bindtap="startPay">
+      支付
+    </button>
+  </view>
+  <view class="userButton">
+    <button class="weui-btn" type="warn" bindtap="addPrice">
+      总支付金额增加10
+    </button>
+  </view>
+
+  <view class="page page__bd">
+    <view class="weui-form-preview__label">付款金额</view>
+    <view class="weui-form-preview__value_in-hd">￥{{ total_fee }}</view>
+  </view>
+
+</view>

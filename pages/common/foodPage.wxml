@@ -1,0 +1,47 @@
+<template name="foodPage">
+  <view class="allFood" style="height: {{foodPageHeight}}rpx">
+    <view style="width: 20%; height: {{foodPageHeight}}rpx">
+      <scroll-view class="orderPage-sideBar" bindscrolltolower="lower" scroll-y="true">
+        <block wx:for="{{ showmenu }}" wx:key="">
+          <view class="menuList">
+            <view class="menu {{index===selected?'selected':''}}" data-index="{{index}}" catchtap="turnMenu">{{item.typeName}}</view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+    <view style="width: 80%; height: {{foodPageHeight}}rpx">
+      <scroll-view class="foodList" scroll-y="true">
+        <view class="title">{{showmenu[selected].typeName}}</view>
+        <block wx:for="{{ showmenu[selected].menuContent }}" wx:key="">
+          <view class="food">
+            <image class="img" src="{{item.picUrl}}"></image>
+            <view class="food-info">
+              <view class="name">{{item.foodName}}</view>
+              <view class="sales">月售 {{item.sales}} 赞 {{item.rating}}
+              </view>
+              <view class="price">￥ {{item.price}}</view>
+            </view>
+            <view class="food-numb">
+              <view class="remove" bindtap="removeFromTrolley" hidden="{{ item.numb == 0 }}" data-index="{{index}}">-</view>
+              <text class="text" hidden="{{item.numb == 0}}">{{ item.numb }}</text>
+              <view class="add" bindtap="addToTrolley" data-index="{{index}}">+</view>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+  <view class="footer {{cost !=0 ? 'active':''}}">
+    <view class="howMuch">
+      <view class="imgCar" style="background:{{cost!=0?'#FFD161':'#E7E7E7'}};" bindtap='openCart'>
+        <image src="/pages/images/trolley.png" style="width:60rpx;height:60rpx;"></image>
+      </view>
+      <view class="clearCar" bindtap='clearCarTap'>
+        <text>清空</text>
+      </view>
+      <view class="cost" hidden="{{cost==0}}">￥{{cost}}</view>
+      <view class="free">满15免配送费</view>
+    </view>
+    <view class="pay" bindtap='gotoPay'>{{cost != 0 ? '去结算':'未选择'}}</view>
+  </view>
+</template>

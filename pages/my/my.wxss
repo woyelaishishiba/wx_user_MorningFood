@@ -1,0 +1,9 @@
+.userButton{
+  width: 600rpx;
+  height: 120rpx;
+  border-radius:120rpx;
+  justify-content: center;
+  margin-bottom: 30rpx;
+  margin-left: 100rpx;
+  margin-top: 100rpx;
+}

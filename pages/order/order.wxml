@@ -1,0 +1,49 @@
+<!--pages/order/order.wxml-->
+<view class="totalcontainer" disable-scroll="true">
+  <!-- <image class="page404" src="/pages/images/404.jpg"></image> -->
+  <block wx:for="{{orderList}}" wx:key>
+    <view class='order' bindtap='navigatorToOrderDetail' data-id="{{item.id}}">
+      <view class='order-num font-middle'>订单号：
+        <text>{{item.id}}</text>
+        <text class='cancle color-org font-big'>{{item.finished ? "已完成" : "未完成"}}</text>
+      </view>
+      <view class='order-info'>
+        <view class='title font-middle'>{{item.foodName}}</view>
+        <view class='date font-middle'>
+          <text>{{item.ready ? "已经买好了，稍等哈" : "还没买好"}}</text>
+          <text>时间：{{item.getTime}}</text>
+        </view>
+      </view>
+      <view class='order-cost font-middle'>
+        <view class='price'>
+          <view>
+            <text>价格：</text>
+            <text class='font-middle color-org'>￥{{item.price}}</text>
+          </view>
+          <view style="display: flex">
+            <text class='price-title'>订金： </text>
+            <text class='font-middle color-org'>￥0</text>
+          </view>
+        </view>
+        <view class='cost-btn'>
+          <block wx:if="{{!item.ready}}">
+            <view class='cancleOrder font-middle color-153' catchtap='openToCancel' data-id="{{item.id}}" hover-class='btn-click-242'>取消</view>
+          </block>
+          <!-- <block wx:else>
+            <view wx:if="{{item.orderStatus != 9}}" class='cancleOrder font-middle color-153' data-id="{{item.orderId}}" data-pho="{{item.masterPhone}}" catchtap="{{item.payStatus==0?'contactOwner':'cancleOrder'}}" hover-class='btn-click-242'>{{item.payStatus==0?'联系房东':'取消'}}</view>
+            <view wx:if="{{item.orderStatus != 9}}" class='pay font-middle' data-pho="{{item.masterPhone}}" catchtap="{{item.payStatus==0?'navigatorToPay':'contactOwner'}}" data-value="{{item.orderId}}" hover-class='btn-click'>{{item.payStatus==0?'付款':'联系房东'}}</view>
+          </block> -->
+        </view>
+      </view>
+    </view>
+  </block>
+  <view class='loadmore' hidden="{{isHideLoadMore}}">
+    <view class="weui-loadmore">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在加载</view>
+    </view>
+  </view>
+  <view class='noMore font-small' wx:if="{{ orderList.length == total }}">
+    已经到底了
+  </view>
+</view>

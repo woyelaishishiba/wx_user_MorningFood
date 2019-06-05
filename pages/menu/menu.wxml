@@ -1,0 +1,21 @@
+<!--pages/menu/menu.wxml-->
+<import src="../common/foodPage.wxml" />
+<import src="../common/foodCartPage.wxml" />
+
+<view class="totalcontainer" disable-scroll="true">
+  <view class="restaurantHeader">
+    <view>
+      <text class='restaurantTitle'>{{name}}</text>
+    </view>
+    <view class="heard-search">
+      <image class="heard-search-icon" src="/pages/images/search.png"></image>
+      <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" style="width: 60%;" />
+      <block wx:if="{{inputVal.length > 0}}">
+        <image class="heard-clear-icon" bindtap="clearInput" src="/pages/images/close.png"></image>
+      </block>
+    </view>
+  </view>
+  <template is="foodPage" data="{{showmenu, selected, howMuch, cost, pullBar, foodPageHeight}}" />
+  <view class="mask" wx:if="{{showCart}}" bindtap='closeCart'></view>
+  <template is="foodCartPage" data="{{animationData, foodChoosed, scrollHeight, cartHeight}}" />
+</view>
